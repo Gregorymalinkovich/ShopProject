@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Каталог аксессуаров</title>
+<style>
+  header {
+    background: white;
+    color: #222;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .logo img {
+    width: 200px;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+  }
+  nav ul li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  nav ul li a:hover {
+    transform: scale(1.2);
+    color: #000;
+  }
+  .cart {
+    font-size: 15px;
+    cursor: pointer;
+    color: #222;
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background: #fff;
+    color: #333;
+  }
+  .container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .filter {
+    flex: 0 0 250px;
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+  }
+  .filter h3 {
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  .filter-section {
+    margin-bottom: 30px;
+  }
+  .accessory-filter {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .filter-item {
+    cursor: pointer;
+    font-weight: 500;
+    padding-bottom: 4px;
+    user-select: none;
+    transition: color 0.3s ease;
+    position: relative;
+    font-size: 12px;
+    color: #333;
+  }
+  .filter-item:hover {
+    color: #e63946;
+  }
+  .filter-item:hover::after,
+  .filter-item.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #e63946;
+    border-radius: 2px;
+  }
+  .filter-item.active {
+    color: #e63946;
+  }
+  .filter-section label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .filter-section input[type="checkbox"],
+  .filter-section input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  .filter-section input[type="range"] {
+    width: 100%;
+  }
+  .products {
+    flex: 1;
+    padding-left: 20px;
+  }
+  .products-header {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+    gap: 20px;
+  }
+  .product-item {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .product-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  .product-name {
+    margin: 10px 0 5px;
+    font-weight: 600;
+  }
+  .product-price {
+    color: #b12704;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="Main.html">
+          <img src="logo1.png" alt="Legit Store Logo" />
+        </a>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="clothing.html">Одежда</a></li>
+          <li><a href="shoes.html">Обувь</a></li>
+          <li><a href="acsessours.html">Аксессуары</a></li>
+          <li><a href="bags.html">Сумки</a></li>
+        </ul>
+      </nav>
+      <a href="cart.html" class="cart">Корзина</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="filter">
+      <h3>Фильтр</h3>
+      <div class="filter-section">
+        <h4>Тип аксессуара</h4>
+        <ul class="accessory-filter">
+          <li class="filter-item active" data-category="all">ВСЕ</li>
+          <li class="filter-item" data-category="Ремни">РЕМНИ</li>
+          <li class="filter-item" data-category="Очки">ОЧКИ</li>
+          <li class="filter-item" data-category="Головные уборы">ГОЛОВНЫЕ УБОРЫ</li>
+        </ul>
+      </div>
+      <div class="filter-section">
+        <h4>Бренд</h4>
+        <label><input type="checkbox" value="Gucci" class="brand-filter"> Gucci</label>
+        <label><input type="checkbox" value="Prada" class="brand-filter"> Prada</label>
+        <label><input type="checkbox" value="Versace" class="brand-filter"> Versace</label>
+        <label><input type="checkbox" value="Balenciaga" class="brand-filter"> Balenciaga</label>
+        <label><input type="checkbox" value="Cartier" class="brand-filter"> Cartier</label>
+        <label><input type="checkbox" value="Tom Ford" class="brand-filter"> Tom Ford</label>
+      </div>
+      <div class="filter-section">
+        <h4>Цвет</h4>
+        <label><input type="checkbox" value="Чёрный" class="color-filter"> Чёрный</label>
+        <label><input type="checkbox" value="Белый" class="color-filter"> Белый</label>
+        <label><input type="checkbox" value="Коричневый" class="color-filter"> Коричневый</label>
+        <label><input type="checkbox" value="Золотой" class="color-filter"> Золотой</label>
+        <label><input type="checkbox" value="Серебряный" class="color-filter"> Серебряный</label>
+      </div>
+      <div class="filter-section">
+        <h4>Цена</h4>
+        <input type="range" id="priceRange" min="0" max="1500000" step="1000" value="1500000">
+        <div>Максимум: <span id="priceValue">1500000</span> ₽</div>
+      </div>
+    </aside>
+
+    <section class="products">
+      <div class="products-header">Каталог аксессуаров</div>
+      <div class="product-list">
+        <div class="product-item" data-category="Головные уборы" data-id="14" data-price="22700" data-brand="Cartier" data-color="Коричневый">
+          <img src="ds2-hat.jpg" alt="DSUQARED2 Хлопковая бейсболка" />
+          <div class="product-name">DSUQARED2 Хлопковая бейсболка</div>
+          <div class="product-price">22 700 ₽</div>
+        </div>
+        <div class="product-item" data-category="Очки" data-id="15" data-price="46450" data-brand="Tom Ford" data-color="Золотой">
+          <img src="saint-glasses.jpg" alt="SAINT LAURENT Солнцезащитные очки" />
+          <div class="product-name">SAINT LAURENT Солнцезащитные очки</div>
+          <div class="product-price">46 450 ₽</div>
+        </div>
+        <div class="product-item" data-category="Ремни" data-id="16" data-price="64800" data-brand="Gucci" data-color="Коричневый">
+          <img src="gucci-belt.jpg" alt="GUCCI Кожаный ремень" />
+          <div class="product-name">GUCCI Кожаный ремень</div>
+          <div class="product-price">64 800 ₽</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryItems = document.querySelectorAll('.filter-item');
+    const brandCheckboxes = document.querySelectorAll('.brand-filter');
+    const colorCheckboxes = document.querySelectorAll('.color-filter');
+    const priceRange = document.getElementById('priceRange');
+    const priceValue = document.getElementById('priceValue');
+    const products = document.querySelectorAll('.product-item');
+
+    let selectedCategory = 'all';
+
+    categoryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        categoryItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        selectedCategory = item.dataset.category;
+        filterProducts();
+      });
+    });
+
+    brandCheckboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+    colorCheckboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+
+    priceRange.addEventListener('input', () => {
+      priceValue.textContent = priceRange.value;
+      filterProducts();
+    });
+
+    function filterProducts() {
+      const selectedBrands = [...brandCheckboxes].filter(cb => cb.checked).map(cb => cb.value);
+      const selectedColors = [...colorCheckboxes].filter(cb => cb.checked).map(cb => cb.value);
+      const maxPrice = parseInt(priceRange.value, 10);
+
+      products.forEach(product => {
+        const category = product.dataset.category;
+        const brand = product.dataset.brand;
+        const color = product.dataset.color;
+        const price = parseInt(product.dataset.price, 10);
+
+        const showProduct = 
+          (selectedCategory === 'all' || category === selectedCategory) &&
+          (selectedBrands.length === 0 || selectedBrands.includes(brand)) &&
+          (selectedColors.length === 0 || selectedColors.includes(color)) &&
+          (price <= maxPrice);
+
+        product.style.display = showProduct ? '' : 'none';
+      });
+    }
+
+    document.querySelectorAll('.product-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const productId = item.getAttribute('data-id');
+        window.location.href = `product.html?id=${productId}`;
+      });
+    });
+
+    filterProducts();
+  });
+</script>
+</body>
+</html>

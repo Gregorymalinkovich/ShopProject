@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Карточка товара</title>
+  <style>
+    header {
+      background: white;
+      color: #222;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .logo img {
+      width: 200px;
+      height: auto;
+      display: block;
+      user-select: none;
+    }
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul {
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+    }
+    nav ul li a {
+      color: #000;
+      text-decoration: none;
+      font-size: 18px;
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+    nav ul li a:hover {
+      transform: scale(1.2);
+      color: #000;
+    }
+    .cart {
+      font-size: 15px;
+      cursor: pointer;
+      color: #222;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    .product-card {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    .product-image {
+      flex: 1 1 400px;
+    }
+    .product-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .product-details {
+      flex: 1 1 400px;
+    }
+    .product-name {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .product-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: #b12704;
+      margin-bottom: 20px;
+    }
+    .product-brand, .product-category, .product-sizes {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #555;
+    }
+    .product-description {
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      margin-left: 200px;
+      text-decoration: none;
+      color: #e63946;
+      font-weight: 600;
+      font-size: 16px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .back-link:hover {
+      border-color: #e63946;
+    }
+    #addToCartBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #e63946;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    #addToCartBtn:hover {
+      background-color: #d62828;
+    }
+    .custom-select-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 140px;
+    }
+    select#sizeSelect {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 16px;
+      border: 2px solid #e63946;
+      border-radius: 6px;
+      background-color: white;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    select#sizeSelect:hover, select#sizeSelect:focus {
+      border-color: #d62828;
+      outline: none;
+      box-shadow: 0 0 8px rgba(214,40,40,0.5);
+    }
+    .custom-select-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #e63946;
+      transform: translateY(-50%);
+      transition: border-top-color 0.3s ease;
+    }
+    select#sizeSelect:hover + .custom-select-wrapper::after,
+    select#sizeSelect:focus + .custom-select-wrapper::after {
+      border-top-color: #d62828;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="Main.html">
+        <img src="logo1.png" alt="Legit Store Logo">
+      </a>
+    </div>
+    <nav>
+      <ul id="menu">
+        <li><a href="clothing.html">Одежда</a></li>
+        <li><a href="shoes.html">Обувь</a></li>
+        <li><a href="acsessours.html">Аксессуары</a></li>
+        <li><a href="bags.html">Сумки</a></li>
+      </ul>
+    </nav>
+    <a href="cart.html" class="cart" title="Перейти в корзину">Корзина</a>
+  </header>
+  <a href="clothing.html" class="back-link">← Вернуться в каталог</a>
+  <div class="container">
+    <div id="productCard" class="product-card"></div>
+  </div>
+
+  <script>
+    const products = [
+      {
+        id: "1",
+        category: "Верхняя одежда",
+        price: 595500,
+        brand: "Bottega Veneta",
+        sizes: ["M", "L", "XL"],
+        name: "BOTTEGA VENETTA Кожанный бомбер",
+        img: "bottega-puffer.jpg",
+        description: "Стильный кожаный бомбер от Bottega Veneta. Идеален для холодной погоды, выполнен из высококачественной кожи."
+      },
+      {
+        id: "2",
+        category: "Джинсы и брюки",
+        price: 78600,
+        brand: "Maison Margiela",
+        sizes: ["S", "M", "L"],
+        name: "MAISON MARGIELA Спортивные брюки",
+        img: "margiela-pants.jpg",
+        description: "Удобные спортивные брюки Maison Margiela для активного отдыха и повседневной носки."
+      },
+      {
+        id: "3",
+        category: "Футболки и лонгсливы",
+        price: 59950,
+        brand: "Maison Margiela",
+        sizes: ["XS", "S", "M", "L", "XL"],
+        name: "MAISON MARGIELA Футболка \"Distressed Logo\"",
+        img: "margiela-t-shorts.jpg",
+        description: "Классическая футболка с фирменным логотипом Maison Margiela."
+      },
+      {
+        id: "4",
+        category: "Свитшоты и худи",
+        price: 98550,
+        brand: "Amiri",
+        sizes: ["M", "L"],
+        name: "AMIRI Хлопковое худи",
+        img: "amiri-hoodie.jpg",
+        description: "Мягкое и комфортное худи из хлопка от бренда Amiri."
+      },
+      {
+        id: "5",
+        category: "Шорты",
+        price: 44300,
+        brand: "RHUDE",
+        sizes: ["S", "M", "L"],
+        name: "RHUDE Шорты для плавания с логотипом",
+        img: "rhude-shorts.jpg",
+        description: "Легкие и стильные шорты для плавания с фирменным логотипом RHUDE."
+      },
+      {
+        id: "6",
+        category: "Верхняя одежда",
+        price: 199500,
+        brand: "Moncler",
+        sizes: ["L", "XL"],
+        name: "Куртка Moncler",
+        img: "moncler-puffer.jpg",
+        description: "Теплая и модная куртка Moncler для холодной погоды."
+      },
+      {
+        id: "7",
+        category: "Кеды",
+        price: 84600,
+        brand: "Maison Margiela",
+        sizes: ["38", "39", "40", "41"],
+        name: "MAISON MARGIELA Низкие кеды Replica \"Painted\"",
+        img: "margiela-replica-shoes.jpg",
+        description: "Уникальные кеды с эффектом ручной росписи от Maison Margiela."
+      },
+      {
+        id: "8",
+        category: "Кеды",
+        price: 22000,
+        brand: "Rhude",
+        sizes: ["40", "41", "42", "43"],
+        name: "RHUDE Высокие кеды \"Rhecess\"",
+        img: "rhude-shoes.jpg",
+        description: "Высокие кеды RHUDE с винтажным стилем и удобной посадкой."
+      },
+      {
+        id: "9",
+        category: "Кеды",
+        price: 52600,
+        brand: "Maison Mihara Yashiro",
+        sizes: ["36", "37", "38", "39", "40"],
+        name: "MAISOM MIHARA YASUHIRO Низкие кеды \"PETERSON 23\"",
+        img: "mihara-shoes.jpg",
+        description: "Современные кеды с необычным дизайном от Mihara Yasuhiro."
+      },
+      {
+        id: "10",
+        category: "Кеды",
+        price: 44600,
+        brand: "MAISON MARGIELA",
+        sizes: ["38", "39", "40", "41", "42"],
+        name: "MAISON MARGIELA Шлепки",
+        img: "margiela-tapki.jpg",
+        description: "Стильные и удобные шлепки от Maison Margiela для повседневной носки."
+      },
+      {
+        id: "11",
+        category: "Сумки через плечо",
+        price: 296000,
+        brand: "Bottega Venetta",
+        sizes: ["onesize"],
+        name: "BOTTEGA VENETTA Сумка Cassette",
+        img: "bottega-bag.jpg",
+        description: "Иконическая сумка Cassette от Bottega Venetta с плетёным дизайном."
+      },
+      {
+        id: "12",
+        category: "Рюкзаки",
+        price: 36450,
+        brand: "Diesel",
+        sizes: ["onesize"],
+        name: "DIESEL Рюкзак Holi-D",
+        img: "diesel-bag.jpg",
+        description: "Практичный и стильный рюкзак Diesel для повседневного использования."
+      },
+      {
+        id: "13",
+        category: "Спортивные сумки",
+        price: 336500,
+        brand: "Saint Laurent",
+        sizes: ["onesize"],
+        name: "SAINT LAURENT Сумка Bowling",
+        img: "saint-bag.jpg",
+        description: "Элегантная спортивная сумка от Saint Laurent в минималистичном стиле."
+      },
+      {
+        id: "14",
+        category: "Головные уборы",
+        price: 22700,
+        brand: "Cartier",
+        sizes: ["onesize"],
+        name: "DSUQARED2 Хлопковая бейсболка",
+        img: "ds2-hat.jpg",
+        description: "Классическая бейсболка из хлопка от DSQUARED2 с логотипом."
+      },
+      {
+        id: "15",
+        category: "Очки",
+        price: 46450,
+        brand: "Tom Ford",
+        sizes: ["onesize"],
+        name: "SAINT LAURENT Солнцезащитные очки",
+        img: "saint-glasses.jpg",
+        description: "Модные солнцезащитные очки Saint Laurent с премиальным дизайном."
+      },
+      {
+        id: "16",
+        category: "Ремни",
+        price: 64800,
+        brand: "Gucci",
+        sizes: ["onesize"],
+        name: "GUCCI Кожаный ремень",
+        img: "gucci-belt.jpg",
+        description: "Элегантный кожаный ремень Gucci с фирменной пряжкой."
+      }
+    ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get("id") || "1";
+    const product = products.find(p => p.id === productId);
+
+    if (!product) {
+      document.getElementById("productCard").innerHTML = "<p>Товар не найден.</p>";
+    } else {
+      const sizesOptions = product.sizes.map(size => `<option value="${size}">${size}</option>`).join("");
+
+      const html = `
+        <div class="product-image">
+          <img src="${product.img}" alt="${product.name}">
+        </div>
+        <div class="product-details">
+          <h1 class="product-name">${product.name}</h1>
+          <div class="product-price">${product.price.toLocaleString('ru-RU')} ₽</div>
+          <div class="product-brand"><strong>Бренд:</strong> ${product.brand}</div>
+          <div class="product-category"><strong>Категория:</strong> ${product.category}</div>
+          <div class="product-sizes">
+            <label for="sizeSelect"><strong>Размер:</strong></label><br>
+            <div class="custom-select-wrapper">
+              <select id="sizeSelect" name="size">
+                ${sizesOptions}
+              </select>
+            </div>
+          </div>
+          <button id="addToCartBtn">Добавить в корзину</button>
+          <div class="product-description">${product.description || ""}</div>
+        </div>
+      `;
+      document.getElementById("productCard").innerHTML = html;
+
+      function addToCart(product, selectedSize) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItemIndex = cart.findIndex(
+          item => item.id === product.id && item.size === selectedSize
+        );
+        
+        if (existingItemIndex !== -1) {
+          cart[existingItemIndex].quantity += 1;
+        } else {
+          cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            img: product.img,
+            size: selectedSize,
+            quantity: 1
+          });
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`Товар "${product.name}" размер ${selectedSize} добавлен в корзину!`);
+      }
+
+      document.getElementById("addToCartBtn").addEventListener("click", () => {
+        const selectedSize = document.getElementById("sizeSelect").value;
+        addToCart(product, selectedSize);
+      });
+    }
+  </script>
+</body>
+</html>

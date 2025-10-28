@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Оформление заказа — Legit Store</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background: #fff;
+    color: #333;
+  }
+  header {
+    background: white;
+    color: #222;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .logo img {
+    width: 200px;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+  }
+  nav ul li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  nav ul li a:hover {
+    transform: scale(1.2);
+    color: #000;
+  }
+  .cart {
+    font-size: 15px;
+    cursor: pointer;
+    color: #222;
+  }
+  .container {
+    max-width: 700px;
+    margin: 30px auto 60px;
+    padding: 0 20px;
+  }
+  h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  form {
+    background: #f9f9f9;
+    padding: 30px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 15px;
+    font-size: 16px;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1.8px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="number"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #222;
+    outline: none;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  button {
+    margin-top: 25px;
+    background-color: #222;
+    color: white;
+    border: none;
+    padding: 14px 0;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #444;
+  }
+  .error-msg {
+    color: #e63946;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="Main.html">
+          <img src="logo1.png" alt="Legit Store Logo" />
+        </a>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="clothing.html">Одежда</a></li>
+          <li><a href="shoes.html">Обувь</a></li>
+          <li><a href="accessories.html">Аксессуары</a></li>
+          <li><a href="bags.html">Сумки</a></li>
+        </ul>
+      </nav>
+      <a href="cart.html" class="cart">Корзина</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Оформление заказа</h1>
+
+    <form id="order-form" novalidate>
+      <label for="fullname">ФИО *</label>
+      <input type="text" id="fullname" name="fullname" required placeholder="Иванов Иван Иванович" />
+      <div class="error-msg" id="error-fullname">Пожалуйста, введите ваше полное имя.</div>
+
+      <label for="email">Электронная почта *</label>
+      <input type="email" id="email" name="email" required placeholder="example@mail.ru" />
+      <div class="error-msg" id="error-email">Пожалуйста, введите корректный email.</div>
+
+      <label for="phone">Телефон *</label>
+      <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67" pattern="^\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}$" />
+      <div class="error-msg" id="error-phone">Введите номер телефона в формате +7 (999) 123-45-67.</div>
+
+      <label for="address">Адрес доставки *</label>
+      <textarea id="address" name="address" required placeholder="Город, улица, дом, квартира"></textarea>
+      <div class="error-msg" id="error-address">Пожалуйста, укажите адрес доставки.</div>
+
+      <label for="payment-method">Способ оплаты *</label>
+      <select id="payment-method" name="payment-method" required>
+        <option value="" disabled selected>Выберите способ оплаты</option>
+        <option value="card">Банковская карта</option>
+        <option value="cash">Наличные при получении</option>
+        <option value="online">Онлайн-банкинг</option>
+      </select>
+      <div class="error-msg" id="error-payment">Пожалуйста, выберите способ оплаты.</div>
+
+      <button type="submit">Подтвердить заказ</button>
+    </form>
+  </div>
+
+<script>
+  const form = document.getElementById('order-form');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    let valid = true;
+
+    document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+
+    const fullname = form.fullname.value.trim();
+    if (fullname.length < 3) {
+      document.getElementById('error-fullname').style.display = 'block';
+      valid = false;
+    }
+
+    const email = form.email.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      document.getElementById('error-email').style.display = 'block';
+      valid = false;
+    }
+
+    const phone = form.phone.value.trim();
+    const phoneRegex = /^\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}$/;
+    if (!phoneRegex.test(phone)) {
+      document.getElementById('error-phone').style.display = 'block';
+      valid = false;
+    }
+
+    const address = form.address.value.trim();
+    if (address.length < 5) {
+      document.getElementById('error-address').style.display = 'block';
+      valid = false;
+    }
+
+    if (!form['payment-method'].value) {
+      document.getElementById('error-payment').style.display = 'block';
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    alert('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
+    form.reset();
+  });
+</script>
+</body>
+</html>

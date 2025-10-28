@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Каталог сумок и портфелей</title>
+  <style>
+    header {
+      background: white;
+      color: #222;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .logo img {
+      width: 200px;
+      height: auto;
+      display: block;
+      user-select: none;
+    }
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul {
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+    }
+    nav ul li a {
+      color: #000;
+      text-decoration: none;
+      font-size: 18px;
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+    nav ul li a:hover {
+      transform: scale(1.2);
+      color: #000;
+    }
+    .cart {
+      font-size: 15px;
+      cursor: pointer;
+      color: #222;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .filter {
+      flex: 0 0 250px;
+      border-right: 1px solid #ddd;
+      padding-right: 20px;
+    }
+    .filter h3 {
+      margin-top: 0;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    .filter-section {
+      margin-bottom: 30px;
+    }
+    .bags-filter, .shoes-filter {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .filter-item {
+      cursor: pointer;
+      font-weight: 500;
+      padding-bottom: 4px;
+      user-select: none;
+      transition: color 0.3s ease;
+      position: relative;
+      font-size: 12px;
+      color: #333;
+      text-transform: uppercase;
+    }
+    .filter-item:hover {
+      color: #e63946;
+    }
+    .filter-item:hover::after,
+    .filter-item.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 100%;
+      background: #e63946;
+      border-radius: 2px;
+    }
+    .filter-item.active {
+      color: #e63946;
+    }
+    .filter-section label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .filter-section input[type="checkbox"] {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    .filter-section input[type="range"] {
+      width: 100%;
+    }
+    .products {
+      flex: 1;
+      padding-left: 20px;
+    }
+    .products-header {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+      gap: 20px;
+    }
+    .product-item {
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .product-item img {
+      max-width: 100%;
+      height: auto;
+    }
+    .product-name {
+      margin: 10px 0 5px;
+      font-weight: 600;
+    }
+    .product-price {
+      color: #b12704;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="Main.html"><img src="logo1.png" alt="Legit Store Logo"></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="clothing.html">Одежда</a></li>
+          <li><a href="shoes.html">Обувь</a></li>
+          <li><a href="acsessours.html">Аксессуары</a></li>
+          <li><a href="bags.html">Сумки</a></li>
+        </ul>
+      </nav>
+      <a href="cart.html" class="cart">Корзина</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="filter">
+      <h3>Фильтр</h3>
+      <div class="filter-section">
+        <h4>Тип сумки</h4>
+        <ul class="shoes-filter">
+          <li class="filter-item active" data-category="all">ВСЕ СУМКИ</li>
+          <li class="filter-item" data-category="Рюкзаки">РЮКЗАКИ</li>
+          <li class="filter-item" data-category="Портфели">ПОРТФЕЛИ</li>
+          <li class="filter-item" data-category="Сумки через плечо">СУМКИ ЧЕРЕЗ ПЛЕЧО</li>
+          <li class="filter-item" data-category="Спортивные сумки">СПОРТИВНЫЕ СУМКИ</li>
+          <li class="filter-item" data-category="Поясные сумки">ПОЯСНЫЕ СУМКИ</li>
+        </ul>
+      </div>
+      <div class="filter-section">
+        <h4>Бренд</h4>
+        <label><input type="checkbox" name="brand" value="Diesel"> Diesel</label>
+        <label><input type="checkbox" name="brand" value="Saint Laurent"> Saint Laurent</label>
+        <label><input type="checkbox" name="brand" value="Bottega Venetta"> Bottega Venetta</label>
+      </div>
+      <div class="filter-section">
+        <h4>Диапазон цены</h4>
+        <input type="range" id="priceRange" min="0" max="1500000" step="1000" value="1500000">
+        <div>Максимум: <span id="priceValue">1500000</span> ₽</div>
+      </div>
+      <div class="filter-section">
+        <h4>Материал</h4>
+        <label><input type="checkbox" name="material" value="Кожа"> Кожа</label>
+        <label><input type="checkbox" name="material" value="Нейлон"> Нейлон</label>
+        <label><input type="checkbox" name="material" value="Ткань"> Ткань</label>
+        <label><input type="checkbox" name="material" value="Эко-кожа"> Эко-кожа</label>
+      </div>
+    </aside>
+
+    <section class="products">
+      <div class="products-header">Каталог сумок и портфелей</div>
+      <div class="product-list">
+        <div class="product-item" data-category="Сумки через плечо" data-id="11" data-price="296000" data-brand="Bottega Venetta" data-material="Кожа">
+          <img src="bottega-bag.jpg" alt="BOTTEGA VENETTA Сумка Cassette">
+          <div class="product-name">BOTTEGA VENETTA Сумка Cassette</div>
+          <div class="product-price">296 000 ₽</div>
+        </div>
+        <div class="product-item" data-category="Рюкзаки" data-id="12" data-price="36450" data-brand="Diesel" data-material="Нейлон">
+          <img src="diesel-bag.jpg" alt="DIESEL Рюкзак Holi-D">
+          <div class="product-name">DIESEL Рюкзак Holi-D</div>
+          <div class="product-price">36 450 ₽</div>
+        </div>
+        <div class="product-item" data-category="Спортивные сумки" data-id="13" data-price="336500" data-brand="Saint Laurent" data-material="Ткань">
+          <img src="saint-bag.jpg" alt="SAINT LAURENT Сумка Bowling">
+          <div class="product-name">SAINT LAURENT Сумка Bowling</div>
+          <div class="product-price">336 500 ₽</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const priceRange = document.getElementById('priceRange');
+      const priceValue = document.getElementById('priceValue');
+      const filterItems = document.querySelectorAll('.filter-item');
+      const brandCheckboxes = document.querySelectorAll('input[name="brand"]');
+      const materialCheckboxes = document.querySelectorAll('input[name="material"]');
+      const products = document.querySelectorAll('.product-item');
+
+      priceRange.addEventListener('input', () => {
+        priceValue.textContent = priceRange.value;
+        filterProducts();
+      });
+
+      filterItems.forEach(item => {
+        item.addEventListener('click', () => {
+          filterItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          filterProducts();
+        });
+      });
+
+      brandCheckboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+      materialCheckboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+
+      function filterProducts() {
+        const selectedCategory = document.querySelector('.filter-item.active').dataset.category;
+        const selectedBrands = [...brandCheckboxes].filter(cb => cb.checked).map(cb => cb.value);
+        const selectedMaterials = [...materialCheckboxes].filter(cb => cb.checked).map(cb => cb.value);
+        const maxPrice = parseInt(priceRange.value, 10);
+
+        products.forEach(product => {
+          const showProduct = 
+            (selectedCategory === 'all' || product.dataset.category === selectedCategory) &&
+            parseInt(product.dataset.price, 10) <= maxPrice &&
+            (selectedBrands.length === 0 || selectedBrands.includes(product.dataset.brand)) &&
+            (selectedMaterials.length === 0 || selectedMaterials.includes(product.dataset.material));
+
+          product.style.display = showProduct ? '' : 'none';
+        });
+      }
+
+      document.querySelectorAll('.product-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const productId = item.getAttribute('data-id');
+          if (productId) window.location.href = `product.html?id=${productId}`;
+        });
+      });
+
+      filterProducts();
+    });
+
+    function addToCart(product, selectedSize) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      const existingItem = cart.find(item => item.id === product.id && item.size === selectedSize);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          img: product.img,
+          size: selectedSize,
+          quantity: 1
+        });
+      }
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`Товар "${product.name}" размер ${selectedSize} добавлен в корзину!`);
+    }
+  </script>
+</body>
+</html>

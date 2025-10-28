@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Каталог обуви</title>
+<style>
+  header {
+    background: white;
+    color: #222;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .logo img {
+    width: 200px;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+  }
+  nav ul li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  nav ul li a:hover {
+    transform: scale(1.2);
+    color: #000;
+  }
+  .cart {
+    font-size: 15px;
+    cursor: pointer;
+    color: #222;
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background: #fff;
+    color: #333;
+  }
+  .container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .filter {
+    flex: 0 0 250px;
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+  }
+  .filter h3 {
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  .filter-section {
+    margin-bottom: 30px;
+  }
+  .shoes-filter {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .filter-item {
+    cursor: pointer;
+    font-weight: 500;
+    padding-bottom: 4px;
+    user-select: none;
+    transition: color 0.3s ease;
+    position: relative;
+    font-size: 12px;
+    color: #333;
+  }
+  .filter-item:hover {
+    color: #e63946;
+  }
+  .filter-item:hover::after,
+  .filter-item.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #e63946;
+    border-radius: 2px;
+  }
+  .filter-item.active {
+    color: #e63946;
+  }
+  .filter-section label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .filter-section input[type="checkbox"],
+  .filter-section input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  .filter-section input[type="range"] {
+    width: 100%;
+  }
+  .products {
+    flex: 1;
+    padding-left: 20px;
+  }
+  .products-header {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+    gap: 20px;
+  }
+  .product-item {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .product-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  .product-name {
+    margin: 10px 0 5px;
+    font-weight: 600;
+  }
+  .product-price {
+    color: #b12704;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="Main.html">
+          <img src="logo1.png" alt="Legit Store Logo">
+        </a>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="clothing.html">Одежда</a></li>
+          <li><a href="shoes.html">Обувь</a></li>
+          <li><a href="acsessours.html">Аксессуары</a></li>
+          <li><a href="bags.html">Сумки</a></li>
+        </ul>
+      </nav>
+      <a href="cart.html" class="cart">Корзина</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="filter">
+      <h3>Фильтр</h3>
+      
+      <div class="filter-section">
+        <h4>Вид обуви</h4>
+        <ul class="shoes-filter">
+          <li class="filter-item active" data-category="all">ОБУВЬ (ВСЕ)</li>
+          <li class="filter-item" data-category="Кроссовки">КРОССОВКИ</li>
+          <li class="filter-item" data-category="Ботинки">БОТИНКИ</li>
+          <li class="filter-item" data-category="Сандалии">САНДАЛИИ</li>
+          <li class="filter-item" data-category="Туфли">ТУФЛИ</li>
+          <li class="filter-item" data-category="Мокасины">МОКАСИНЫ</li>
+          <li class="filter-item" data-category="Кеды">КЕДЫ</li>
+        </ul>
+      </div>
+      
+      <div class="filter-section">
+        <h4>Бренд</h4>
+        <label><input type="checkbox" name="brand" value="Maison Margiela"> Maison Margiela</label>
+        <label><input type="checkbox" name="brand" value="Maison Mihara Yashiro"> Maison Mihara Yashiro</label>
+        <label><input type="checkbox" name="brand" value="Rhude"> Rhude</label>
+        <label><input type="checkbox" name="brand" value="Comme des Garsons Play"> Comme des Garsons Play</label>
+      </div>
+      
+      <div class="filter-section">
+        <h4>Диапазон цены</h4>
+        <input type="range" id="priceRange" min="0" max="1500000" step="500" value="1500000">
+        <div>Максимум: <span id="priceValue">1500000</span> ₽</div>
+      </div>
+      
+      <div class="filter-section">
+        <h4>Размер</h4>
+        <label><input type="checkbox" name="size" value="36"> 36</label>
+        <label><input type="checkbox" name="size" value="37"> 37</label>
+        <label><input type="checkbox" name="size" value="38"> 38</label>
+        <label><input type="checkbox" name="size" value="39"> 39</label>
+        <label><input type="checkbox" name="size" value="40"> 40</label>
+        <label><input type="checkbox" name="size" value="41"> 41</label>
+        <label><input type="checkbox" name="size" value="42"> 42</label>
+        <label><input type="checkbox" name="size" value="43"> 43</label>
+        <label><input type="checkbox" name="size" value="44"> 44</label>
+      </div>
+    </aside>
+
+    <section class="products">
+      <div class="products-header">Каталог обуви</div>
+      <div class="product-list">
+        <div class="product-item" data-category="Кеды" data-id="7" data-price="84600" data-brand="Maison Margiela" data-sizes="38,39,40,41">
+          <img src="margiela-replica-shoes.jpg" alt="Maison Margiela Низкие кеды Replica Painted">
+          <div class="product-name">MAISON MARGIELA Низкие кеды Replica "Painted"</div>
+          <div class="product-price">84 600 ₽</div>
+        </div>
+        <div class="product-item" data-category="Кеды" data-id="8" data-price="22000" data-brand="Rhude" data-sizes="40,41,42,43">
+          <img src="rhude-shoes.jpg" alt="RHUDE Высокие кеды Rhecess">
+          <div class="product-name">RHUDE Высокие кеды "Rhecess"</div>
+          <div class="product-price">22 000 ₽</div>
+        </div>
+        <div class="product-item" data-category="Кеды" data-id="9" data-price="52600" data-brand="Maison Mihara Yashiro" data-sizes="36,37,38,39,40">
+          <img src="mihara-shoes.jpg" alt="Maison MIHARA YASUHIRO Низкие кеды PETERSON 23">
+          <div class="product-name">MAISOM MIHARA YASUHIRO Низкие кеды "PETERSON 23"</div>
+          <div class="product-price">52 600 ₽</div>
+        </div>
+        <div class="product-item" data-category="Сандалии" data-id="10" data-price="44600" data-brand="Maison Margiela" data-sizes="38,39,40,41,42">
+          <img src="margiela-tapki.jpg" alt="MAISON MARGIELA Шлепки">
+          <div class="product-name">MAISON MARGIELA Шлепки "Tabi"</div>
+          <div class="product-price">44 600 ₽</div>
+        </div>
+        <div class="product-item" data-category="Кеды" data-id="11" data-price="19200" data-brand="Comme des Garsons Play" data-sizes="39,40,41,42">
+          <img src="cmg-shoes.jpg" alt="COMME DES GARSONS PLAY Кеды Converse x CDG Play">
+          <div class="product-name">COMME DES GARSONS PLAY Кеды Converse x CDG Play</div>
+          <div class="product-price">19 200 ₽</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const priceRange = document.getElementById('priceRange');
+    const priceValue = document.getElementById('priceValue');
+    const filterItems = document.querySelectorAll('.filter-item');
+    const brandCheckboxes = document.querySelectorAll('input[name="brand"]');
+    const sizeCheckboxes = document.querySelectorAll('input[name="size"]');
+    const products = document.querySelectorAll('.product-item');
+
+    priceRange.addEventListener('input', () => {
+      priceValue.textContent = priceRange.value;
+      filterProducts();
+    });
+
+    filterItems.forEach(item => {
+      item.addEventListener('click', () => {
+        filterItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        filterProducts();
+      });
+    });
+
+    brandCheckboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+    sizeCheckboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+
+    function filterProducts() {
+      const selectedCategory = document.querySelector('.filter-item.active').dataset.category.toLowerCase();
+      const maxPrice = Number(priceRange.value);
+      const selectedBrands = Array.from(brandCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value.toLowerCase());
+      const selectedSizes = Array.from(sizeCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value);
+
+      products.forEach(prod => {
+        const category = prod.dataset.category.toLowerCase();
+        const price = Number(prod.dataset.price);
+        const brand = prod.dataset.brand.toLowerCase();
+        const sizes = prod.dataset.sizes.split(',');
+
+        const matchCategory = selectedCategory === 'all' || category === selectedCategory;
+        const matchPrice = price <= maxPrice;
+        const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(brand);
+        const matchSize = selectedSizes.length === 0 || selectedSizes.some(sz => sizes.includes(sz));
+
+        if (matchCategory && matchPrice && matchBrand && matchSize) {
+          prod.style.display = 'block';
+        } else {
+          prod.style.display = 'none';
+        }
+      });
+    }
+
+    document.querySelectorAll('.product-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const id = item.dataset.id;
+        if (id) {
+          window.location.href = `product.html?id=${id}`;
+        }
+      });
+    });
+
+    filterProducts();
+
+    function addToCart(product, selectedSize) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      const existingItemIndex = cart.findIndex(
+        item => item.id === product.id && item.size === selectedSize
+      );
+      
+      if (existingItemIndex !== -1) {
+        cart[existingItemIndex].quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          img: product.img,
+          size: selectedSize,
+          quantity: 1
+        });
+      }
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`Товар "${product.name}" размер ${selectedSize} добавлен в корзину!`);
+    }
+
+    document.getElementById("addToCartBtn").addEventListener("click", () => {
+      const selectedSize = document.getElementById("sizeSelect").value;
+      addToCart(product, selectedSize);
+    });
+  </script>
+</body>
+</html>

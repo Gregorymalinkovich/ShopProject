@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legit Store - Магазин одежды</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+    }
+    header {
+      background: white;
+      color: #222;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .logo img {
+      width: 200px;
+      height: auto;
+      display: block;
+      user-select: none;
+    }
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul {
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+    }
+    nav ul li a {
+      color: #000;
+      text-decoration: none;
+      font-size: 18px;
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+    nav ul li a:hover {
+      transform: scale(1.2);
+      color: #000;
+    }
+    .cart {
+      font-size: 15px;
+      cursor: pointer;
+      color: #222;
+    }
+    .slider {
+      position: relative;
+      overflow: hidden;
+      max-width: 1200px;
+      margin: 30px auto;
+      border-radius: 12px;
+      height: 450px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      background: white;
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+      height: 100%;
+    }
+    .slide {
+      min-width: 100%;
+      user-select: none;
+      position: relative;
+      height: 100%;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+    .slider-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none;
+      padding: 0 15px;
+    }
+    .slider-buttons button {
+      background: rgba(0,0,0,0.4);
+      border: none;
+      color: white;
+      padding: 12px 16px;
+      cursor: pointer;
+      pointer-events: auto;
+      border-radius: 50%;
+      font-size: 20px;
+      transition: background 0.3s ease;
+      user-select: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    .slider-buttons button:hover {
+      background: #e63946;
+      box-shadow: 0 4px 12px rgba(230, 57, 70, 0.7);
+    }
+    .products {
+      max-width: 1200px;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+      gap: 25px;
+      padding: 0 15px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+    }
+    .product-card img {
+      max-width: 100%;
+      height: 160px;
+      object-fit: contain;
+      margin-bottom: 14px;
+      border-radius: 8px;
+    }
+    .product-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      text-align: center;
+      color: #1a1a1a;
+    }
+    .product-card p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 14px;
+      text-align: center;
+      min-height: 40px;
+    }
+    .product-card .price {
+      font-weight: 700;
+      color: #e63946;
+      font-size: 18px;
+    }
+    footer {
+      background: #1a1a1a;
+      color: #ccc;
+      padding: 25px 15px;
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="Main.html">
+        <img src="logo1.png" alt="Legit Store Logo" />
+      </a>
+    </div>
+    <nav>
+      <ul id="menu">
+        <li><a href="clothing.html">Одежда</a></li>
+        <li><a href="shoes.html">Обувь</a></li>
+        <li><a href="acsessours.html">Аксессуары</a></li>
+        <li><a href="bags.html">Сумки</a></li>
+      </ul>
+    </nav>
+    <a href="cart.html" class="cart" title="Перейти в корзину">Корзина</a>
+  </header>
+
+  <div class="slider" id="slider">
+    <div class="slides">
+      <div class="slide"><img src="slaid1.jpg" alt="Слайд 1" /></div>
+      <div class="slide"><img src="slaid2.jpg" alt="Слайд 2" /></div>
+      <div class="slide"><img src="slaid3.jpg" alt="Слайд 3" /></div>
+      <div class="slide"><img src="slaid4.jpg" alt="Слайд 4" /></div>
+    </div>
+    <div class="slider-buttons">
+      <button id="prev">&#10094;</button>
+      <button id="next">&#10095;</button>
+    </div>
+  </div>
+  
+  <h2 style="text-align: center; font-size: 28px; margin-top: 40px; color: #1a1a1a;">
+    Новинки
+  </h2>
+  
+  <section class="products">
+    <div class="product-card">
+      <img src="bottega-puffer.jpg" alt="Куртка" />
+      <h3>BOTTEGA VENETTA</h3>
+      <p>Кожанный бомбер</p>
+      <div class="price">595 500 ₽</div>
+    </div>
+    <div class="product-card">
+      <img src="margiela-replica-shoes.jpg" />
+      <h3>MAISON MARGIELA</h3>
+      <p>Низкие кеды Replica "Painted"</p>
+      <div class="price">84 600 ₽</div>
+    </div>
+    <div class="product-card">
+      <img src="bottega-bag.jpg" alt="Сумка" />
+      <h3>BOTTEGA VENETTA</h3>
+      <p>Сумка Cassette</p>
+      <div class="price">296 000 ₽</div>
+    </div>
+    <div class="product-card">
+      <img src="ds2-hat.jpg" alt="бейсболка" />
+      <h3>DSUQARED2</h3>
+      <p>Хлопковая бейсболка</p>
+      <div class="price">22 700 ₽</div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Legit Storeee. Все права защищены.
+  </footer>
+
+  <script>
+    const slides = document.querySelector('.slides');
+    const slideCount = document.querySelectorAll('.slide').length;
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % slideCount;
+      showSlide(currentIndex);
+    }, 3000);
+
+    document.getElementById('next').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slideCount;
+      showSlide(currentIndex);
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+      showSlide(currentIndex);
+    });
+  </script>
+</body>
+</html>

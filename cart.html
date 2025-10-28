@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Корзина — Legit Storeee</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background: #fff;
+    color: #333;
+  }
+  header {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .logo img {
+    width: 200px;
+    height: auto;
+    user-select: none;
+  }
+  nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+  }
+  nav ul li a {
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  nav ul li a:hover {
+    transform: scale(1.2);
+    color: #000;
+  }
+  .cart {
+    font-size: 15px;
+    cursor: pointer;
+    color: #222;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead tr {
+    background-color: #f5f5f5;
+  }
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+  }
+  th {
+    font-weight: 700;
+  }
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+  .product-image {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+  }
+  .product-name {
+    font-weight: 600;
+  }
+  .product-price {
+    color: #b12704;
+    font-weight: 700;
+  }
+  .quantity-input {
+    width: 50px;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+  }
+  .remove-btn {
+    background-color: #e63946;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  .remove-btn:hover {
+    background-color: #b22234;
+  }
+  .total-row td {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .empty-cart {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 40px;
+    color: #777;
+  }
+  #checkout-btn {
+    background-color: #222;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #checkout-btn:hover {
+    background-color: #444;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <a href="Main.html">
+        <img src="logo1.png" alt="Legit Store Logo" />
+      </a>
+    </div>
+    <nav>
+      <ul id="menu">
+        <li><a href="clothing.html">Одежда</a></li>
+        <li><a href="shoes.html">Обувь</a></li>
+        <li><a href="accessories.html">Аксессуары</a></li>
+        <li><a href="bags.html">Сумки</a></li>
+      </ul>
+    </nav>
+    <a href="cart.html" class="cart">Корзина</a>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Ваша корзина</h1>
+
+  <table id="cart-table">
+    <thead>
+      <tr>
+        <th>Товар</th>
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Итого</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Товары подгружаются динамически -->
+    </tbody>
+    <tfoot>
+      <tr class="total-row">
+        <td colspan="4" style="text-align:right;">Общая сумма:</td>
+        <td id="cart-total" colspan="2">0 ₽</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div style="text-align: right; margin-top: 20px;">
+    <button id="checkout-btn">Оформить заказ</button>
+  </div>
+
+  <div id="empty-message" class="empty-cart" style="display:none;">
+    Ваша корзина пуста.
+  </div>
+</div>
+
+<script>
+  const cartTable = document.getElementById('cart-table');
+  const cartTotal = document.getElementById('cart-total');
+  const emptyMessage = document.getElementById('empty-message');
+
+  function updateTotal() {
+    let total = 0;
+    const rows = cartTable.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const price = parseInt(row.querySelector('.product-price').dataset.price, 10);
+      const qty = parseInt(row.querySelector('.quantity-input').value, 10);
+      const totalPriceCell = row.querySelector('.total-price');
+      const totalPrice = price * qty;
+      total += totalPrice;
+      totalPriceCell.textContent = totalPrice.toLocaleString('ru-RU') + ' ₽';
+    });
+    cartTotal.textContent = total.toLocaleString('ru-RU') + ' ₽';
+
+    if (rows.length === 0) {
+      cartTable.style.display = 'none';
+      emptyMessage.style.display = 'block';
+    } else {
+      cartTable.style.display = '';
+      emptyMessage.style.display = 'none';
+    }
+  }
+
+  function displayCartItems() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const tbody = cartTable.querySelector('tbody');
+    tbody.innerHTML = '';
+
+    if (cart.length === 0) {
+      cartTable.style.display = 'none';
+      emptyMessage.style.display = 'block';
+      return;
+    }
+
+    cart.forEach(item => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><img class="product-image" src="${item.img}" alt="${item.name}" /></td>
+        <td class="product-name">${item.name} (${item.size})</td>
+        <td class="product-price" data-price="${item.price}">${item.price.toLocaleString('ru-RU')} ₽</td>
+        <td><input type="number" class="quantity-input" min="1" value="${item.quantity}" /></td>
+        <td class="total-price">${(item.price * item.quantity).toLocaleString('ru-RU')} ₽</td>
+        <td><button class="remove-btn" data-id="${item.id}" data-size="${item.size}">Удалить</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    updateTotal();
+  }
+
+  function removeFromCart(id, size) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = cart.filter(item => !(item.id === id && item.size === size));
+    localStorage.setItem('cart', JSON.stringify(cart));
+    displayCartItems();
+  }
+
+  cartTable.addEventListener('click', e => {
+    if (e.target.classList.contains('remove-btn')) {
+      const id = e.target.getAttribute('data-id');
+      const size = e.target.getAttribute('data-size');
+      removeFromCart(id, size);
+    }
+  });
+
+  cartTable.addEventListener('input', e => {
+    if (e.target.classList.contains('quantity-input')) {
+      const row = e.target.closest('tr');
+      const id = row.querySelector('.remove-btn').getAttribute('data-id');
+      const size = row.querySelector('.remove-btn').getAttribute('data-size');
+      const newQty = parseInt(e.target.value, 10);
+      if (newQty < 1) {
+        e.target.value = 1;
+        return;
+      }
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const index = cart.findIndex(item => item.id === id && item.size === size);
+      if (index !== -1) {
+        cart[index].quantity = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateTotal();
+      }
+    }
+  });
+
+  document.getElementById('checkout-btn').addEventListener('click', () => {
+    window.location.href = 'order.html';
+  });
+
+  document.addEventListener('DOMContentLoaded', displayCartItems);
+</script>
+</body>
+</html>

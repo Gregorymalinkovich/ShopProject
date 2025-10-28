@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Каталог одежды</title>
+<style>
+  header {
+    background: white;
+    color: #222;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .logo img {
+    width: 200px;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+  }
+  nav ul li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  nav ul li a:hover {
+    transform: scale(1.2);
+    color: #000;
+  }
+  .cart {
+    font-size: 15px;
+    cursor: pointer;
+    color: #222;
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background: #fff;
+    color: #333;
+  }
+  .container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .filter {
+    flex: 0 0 250px;
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+  }
+  .filter h3 {
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  .filter-section {
+    margin-bottom: 30px;
+  }
+  .clothes-filter {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .filter-item {
+    cursor: pointer;
+    font-weight: 500;
+    padding-bottom: 4px;
+    user-select: none;
+    transition: color 0.3s ease;
+    position: relative;
+    font-size: 12px;
+    color: #333;
+  }
+  .filter-item:hover {
+    color: #e63946;
+  }
+  .filter-item:hover::after,
+  .filter-item.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #e63946;
+    border-radius: 2px;
+  }
+  .filter-item.active {
+    color: #e63946;
+  }
+  .filter-section label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .filter-section input[type="checkbox"],
+  .filter-section input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  .filter-section input[type="range"] {
+    width: 100%;
+  }
+  .products {
+    flex: 1;
+    padding-left: 20px;
+  }
+  .products-header {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+    gap: 20px;
+  }
+  .product-item {
+    padding: 10px;
+    text-align: center;
+  }
+  .product-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  .product-name {
+    margin: 10px 0 5px;
+    font-weight: 600;
+  }
+  .product-price {
+    color: #b12704;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="Main.html">
+        <img src="logo1.png" alt="Legit Store Logo" />
+      </a>
+    </div>
+    <nav>
+      <ul id="menu">
+        <li><a href="clothing.html">Одежда</a></li>
+        <li><a href="shoes.html">Обувь</a></li>
+        <li><a href="acsessours.html">Аксессуары</a></li>
+        <li><a href="bags.html">Сумки</a></li>
+      </ul>
+    </nav>
+    <a href="cart.html" class="cart" title="Перейти в корзину">Корзина</a>
+  </header>
+
+  <div class="container">
+    <aside class="filter">
+      <h3>Фильтр</h3>
+      
+      <div class="filter-section">
+        <h4>Вид одежды</h4>
+        <ul class="clothes-filter">
+          <li class="filter-item active" data-category="all">ОДЕЖДА (ВСЕ)</li>
+          <li class="filter-item" data-category="Верхняя одежда">ВЕРХНЯЯ ОДЕЖДА</li>
+          <li class="filter-item" data-category="Футболки и лонгсливы">ФУТБОЛКИ И ЛОНГСЛИВЫ</li>
+          <li class="filter-item" data-category="Джинсы и брюки">ДЖИНСЫ И БРЮКИ</li>
+          <li class="filter-item" data-category="Шорты">ШОРТЫ</li>
+          <li class="filter-item" data-category="Свитшоты и худи">СВИТШОТЫ И ХУДИ</li>
+        </ul>
+      </div>
+      
+      <div class="filter-section">
+        <h4>Бренд</h4>
+        <label><input type="checkbox" name="brand" value="Amiri" /> Amiri</label>
+        <label><input type="checkbox" name="brand" value="Balenciaga" /> Balenciaga</label>
+        <label><input type="checkbox" name="brand" value="Bottega Veneta" /> Bottega Veneta</label>
+        <label><input type="checkbox" name="brand" value="Celine" /> Celine</label>
+        <label><input type="checkbox" name="brand" value="Diesel" /> Diesel</label>
+        <label><input type="checkbox" name="brand" value="Maison Margiela" /> Maison Margiela</label>
+        <label><input type="checkbox" name="brand" value="Moncler" /> Moncler</label>
+        <label><input type="checkbox" name="brand" value="Chanel" /> Chanel</label>
+        <label><input type="checkbox" name="brand" value="Prada" /> Prada</label>
+        <label><input type="checkbox" name="brand" value="Gucci" /> Gucci</label>
+        <label><input type="checkbox" name="brand" value="Adidas" /> Rhude</label>
+        <label><input type="checkbox" name="brand" value="Nike" /> Nike</label>
+      </div>
+      
+      <div class="filter-section">
+        <h4>Диапазон цены</h4>
+        <input type="range" id="priceRange" min="0" max="1500000" step="1000" value="1500000" />
+        <div>Максимум: <span id="priceValue">1500000</span> ₽</div>
+      </div>
+      
+      <div class="filter-section">
+        <h4>Размер</h4>
+        <label><input type="checkbox" name="size" value="XS" /> XS</label>
+        <label><input type="checkbox" name="size" value="S" /> S</label>
+        <label><input type="checkbox" name="size" value="M" /> M</label>
+        <label><input type="checkbox" name="size" value="L" /> L</label>
+        <label><input type="checkbox" name="size" value="XL" /> XL</label>
+      </div>
+    </aside>
+
+    <section class="products">
+      <div class="products-header">Каталог одежды</div>
+      <div class="product-list">
+        <div class="product-item" data-category="Верхняя одежда" data-id="1" data-price="595500" data-brand="Bottega Veneta" data-sizes="M,L,XL">
+          <img src="bottega-puffer.jpg" alt="Кожаный бомбер Bottega Venetta" />
+          <div class="product-name">BOTTEGA VENETTA Кожанный бомбер</div>
+          <div class="product-price">595 500 ₽</div>
+        </div>
+        <div class="product-item" data-category="Джинсы и брюки" data-id="2" data-price="78600" data-brand="Maison Margiela" data-sizes="S,M,L">
+          <img src="margiela-pants.jpg" alt="Maison Margiela Спортивные брюки" />
+          <div class="product-name">MAISON MARGIELA Спортивные брюки</div>
+          <div class="product-price">78 600 ₽</div>
+        </div>
+        <div class="product-item" data-category="Футболки и лонгсливы" data-id="3" data-price="59950" data-brand="Maison Margiela" data-sizes="XS,S,M,L,XL">
+          <img src="margiela-t-shorts.jpg" alt="Футболка MAISON MARGIELA" />
+          <div class="product-name">MAISON MARGIELA Футболка "Distressed Logo"</div>
+          <div class="product-price">59 950 ₽</div>
+        </div>
+        <div class="product-item" data-category="Свитшоты и худи" data-id="4" data-price="98550" data-brand="Amiri" data-sizes="M,L">
+          <img src="amiri-hoodie.jpg" alt="Amiri Хлопковое худи" />
+          <div class="product-name">AMIRI Хлопковое худи</div>
+          <div class="product-price">98 550 ₽</div>
+        </div>
+        <div class="product-item" data-category="Шорты" data-id="5" data-price="44300" data-brand="RHUDE" data-sizes="S,M,L">
+          <img src="rhude-shorts.jpg" alt="Шорты RHUDE" />
+          <div class="product-name">RHUDE Шорты для плавания с логотипом</div>
+          <div class="product-price">44 300 ₽</div>
+        </div>
+        <div class="product-item" data-category="Верхняя одежда" data-id="6" data-price="199500" data-brand="Moncler" data-sizes="L,XL">
+          <img src="moncler-puffer.jpg" alt="Пуховик Moncler Ume" />
+          <div class="product-name">Куртка Moncler</div>
+          <div class="product-price">199 500 ₽</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<script>
+  const clothesFilterItems = document.querySelectorAll('.clothes-filter .filter-item');
+  const productItems = document.querySelectorAll('.product-item');
+  const brandCheckboxes = document.querySelectorAll('input[name="brand"]');
+  const sizeCheckboxes = document.querySelectorAll('input[name="size"]');
+  const priceRange = document.getElementById('priceRange');
+  const priceValue = document.getElementById('priceValue');
+
+  let selectedCategory = 'all';
+  let selectedBrands = new Set();
+  let selectedSizes = new Set();
+  let maxPrice = +priceRange.value;
+
+  priceValue.textContent = maxPrice;
+
+  clothesFilterItems.forEach(item => {
+    item.addEventListener('click', () => {
+      clothesFilterItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      selectedCategory = item.getAttribute('data-category');
+      filterProducts();
+    });
+  });
+
+  brandCheckboxes.forEach(cb => cb.addEventListener('change', () => {
+    selectedBrands = new Set(
+      Array.from(brandCheckboxes)
+           .filter(c => c.checked)
+           .map(c => c.value)
+    );
+    filterProducts();
+  }));
+
+  sizeCheckboxes.forEach(cb => cb.addEventListener('change', () => {
+    selectedSizes = new Set(
+      Array.from(sizeCheckboxes)
+           .filter(c => c.checked)
+           .map(c => c.value)
+    );
+    filterProducts();
+  }));
+
+  priceRange.addEventListener('input', () => {
+    maxPrice = +priceRange.value;
+    priceValue.textContent = maxPrice;
+    filterProducts();
+  });
+
+  function filterProducts() {
+    productItems.forEach(item => {
+      const category = item.getAttribute('data-category');
+      const brand = item.getAttribute('data-brand');
+      const price = +item.getAttribute('data-price');
+      const sizes = item.getAttribute('data-sizes').split(',');
+
+      let categoryMatch = (selectedCategory === 'all') || (category === selectedCategory);
+      let brandMatch = (selectedBrands.size === 0) || selectedBrands.has(brand);
+      let priceMatch = price <= maxPrice;
+      let sizeMatch = (selectedSizes.size === 0) || sizes.some(sz => selectedSizes.has(sz));
+
+      if (categoryMatch && brandMatch && priceMatch && sizeMatch) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  document.querySelectorAll('.product-item').forEach(item => {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => {
+      const productId = item.getAttribute('data-id');
+      window.location.href = `product.html?id=${productId}`;
+    });
+  });
+
+  filterProducts();
+</script>
+</body>
+</html>
