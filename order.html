@@ -59,6 +59,56 @@
     font-size: 15px;
     cursor: pointer;
     color: #222;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  .language-switcher {
+    margin-left: 10px;
+  }
+  .lang-toggle {
+    background: white;
+    border: 2px solid #e63946;
+    border-radius: 20px;
+    padding: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 70px;
+    height: 32px;
+  }
+  .lang-option {
+    flex: 1;
+    text-align: center;
+    padding: 4px 0;
+    z-index: 1;
+    transition: color 0.3s ease;
+    font-size: 14px;
+  }
+  .lang-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 33px;
+    height: 24px;
+    background: #e63946;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    z-index: 0;
+  }
+  .lang-toggle.en .lang-slider {
+    transform: translateX(33px);
+  }
+  .lang-toggle.en .lang-option:first-child {
+    color: #666;
+  }
+  .lang-toggle:not(.en) .lang-option:last-child {
+    color: #666;
+  }
+  .lang-option.active {
+    color: white !important;
   }
   .container {
     max-width: 700px;
@@ -144,37 +194,46 @@
       </div>
       <nav>
         <ul id="menu">
-          <li><a href="clothing.html">Одежда</a></li>
-          <li><a href="shoes.html">Обувь</a></li>
-          <li><a href="accessories.html">Аксессуары</a></li>
-          <li><a href="bags.html">Сумки</a></li>
+          <li><a href="clothing.html" data-key="clothing">Одежда</a></li>
+          <li><a href="shoes.html" data-key="shoes">Обувь</a></li>
+          <li><a href="acsessours.html" data-key="accessories">Аксессуары</a></li>
+          <li><a href="bags.html" data-key="bags">Сумки</a></li>
         </ul>
       </nav>
-      <a href="cart.html" class="cart">Корзина</a>
+      <div style="display: flex; align-items: center;">
+        <a href="cart.html" class="cart" data-key="cart">Корзина</a>
+        <div class="language-switcher">
+          <div class="lang-toggle" id="lang-toggle">
+            <div class="lang-slider"></div>
+            <div class="lang-option active">RU</div>
+            <div class="lang-option">EN</div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
   <div class="container">
-    <h1>Оформление заказа</h1>
+    <h1 data-key="checkout">Оформление заказа</h1>
 
     <form id="order-form" novalidate>
-      <label for="fullname">ФИО *</label>
+      <label for="fullname" data-key="fullName">ФИО *</label>
       <input type="text" id="fullname" name="fullname" required placeholder="Иванов Иван Иванович" />
       <div class="error-msg" id="error-fullname">Пожалуйста, введите ваше полное имя.</div>
 
-      <label for="email">Электронная почта *</label>
+      <label for="email" data-key="email">Электронная почта *</label>
       <input type="email" id="email" name="email" required placeholder="example@mail.ru" />
       <div class="error-msg" id="error-email">Пожалуйста, введите корректный email.</div>
 
-      <label for="phone">Телефон *</label>
+      <label for="phone" data-key="phone">Телефон *</label>
       <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67" pattern="^\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}$" />
       <div class="error-msg" id="error-phone">Введите номер телефона в формате +7 (999) 123-45-67.</div>
 
-      <label for="address">Адрес доставки *</label>
+      <label for="address" data-key="address">Адрес доставки *</label>
       <textarea id="address" name="address" required placeholder="Город, улица, дом, квартира"></textarea>
       <div class="error-msg" id="error-address">Пожалуйста, укажите адрес доставки.</div>
 
-      <label for="payment-method">Способ оплаты *</label>
+      <label for="payment-method" data-key="paymentMethod">Способ оплаты *</label>
       <select id="payment-method" name="payment-method" required>
         <option value="" disabled selected>Выберите способ оплаты</option>
         <option value="card">Банковская карта</option>
@@ -183,56 +242,57 @@
       </select>
       <div class="error-msg" id="error-payment">Пожалуйста, выберите способ оплаты.</div>
 
-      <button type="submit">Подтвердить заказ</button>
+      <button type="submit" data-key="confirmOrder">Подтвердить заказ</button>
     </form>
   </div>
 
-<script>
-  const form = document.getElementById('order-form');
+  <script src="language-manager.js"></script>
+  <script>
+    const form = document.getElementById('order-form');
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
-    let valid = true;
+      let valid = true;
 
-    document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
 
-    const fullname = form.fullname.value.trim();
-    if (fullname.length < 3) {
-      document.getElementById('error-fullname').style.display = 'block';
-      valid = false;
-    }
+      const fullname = form.fullname.value.trim();
+      if (fullname.length < 3) {
+        document.getElementById('error-fullname').style.display = 'block';
+        valid = false;
+      }
 
-    const email = form.email.value.trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      document.getElementById('error-email').style.display = 'block';
-      valid = false;
-    }
+      const email = form.email.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('error-email').style.display = 'block';
+        valid = false;
+      }
 
-    const phone = form.phone.value.trim();
-    const phoneRegex = /^\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}$/;
-    if (!phoneRegex.test(phone)) {
-      document.getElementById('error-phone').style.display = 'block';
-      valid = false;
-    }
+      const phone = form.phone.value.trim();
+      const phoneRegex = /^\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}$/;
+      if (!phoneRegex.test(phone)) {
+        document.getElementById('error-phone').style.display = 'block';
+        valid = false;
+      }
 
-    const address = form.address.value.trim();
-    if (address.length < 5) {
-      document.getElementById('error-address').style.display = 'block';
-      valid = false;
-    }
+      const address = form.address.value.trim();
+      if (address.length < 5) {
+        document.getElementById('error-address').style.display = 'block';
+        valid = false;
+      }
 
-    if (!form['payment-method'].value) {
-      document.getElementById('error-payment').style.display = 'block';
-      valid = false;
-    }
+      if (!form['payment-method'].value) {
+        document.getElementById('error-payment').style.display = 'block';
+        valid = false;
+      }
 
-    if (!valid) return;
+      if (!valid) return;
 
-    alert('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
-    form.reset();
-  });
-</script>
+      alert('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
+      form.reset();
+    });
+  </script>
 </body>
 </html>

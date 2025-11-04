@@ -57,6 +57,56 @@
     font-size: 15px;
     cursor: pointer;
     color: #222;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  .language-switcher {
+    margin-left: 10px;
+  }
+  .lang-toggle {
+    background: white;
+    border: 2px solid #e63946;
+    border-radius: 20px;
+    padding: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 70px;
+    height: 32px;
+  }
+  .lang-option {
+    flex: 1;
+    text-align: center;
+    padding: 4px 0;
+    z-index: 1;
+    transition: color 0.3s ease;
+    font-size: 14px;
+  }
+  .lang-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 33px;
+    height: 24px;
+    background: #e63946;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    z-index: 0;
+  }
+  .lang-toggle.en .lang-slider {
+    transform: translateX(33px);
+  }
+  .lang-toggle.en .lang-option:first-child {
+    color: #666;
+  }
+  .lang-toggle:not(.en) .lang-option:last-child {
+    color: #666;
+  }
+  .lang-option.active {
+    color: white !important;
   }
   .container {
     max-width: 1200px;
@@ -152,27 +202,36 @@
     </div>
     <nav>
       <ul id="menu">
-        <li><a href="clothing.html">Одежда</a></li>
-        <li><a href="shoes.html">Обувь</a></li>
-        <li><a href="accessories.html">Аксессуары</a></li>
-        <li><a href="bags.html">Сумки</a></li>
+        <li><a href="clothing.html" data-key="clothing">Одежда</a></li>
+        <li><a href="shoes.html" data-key="shoes">Обувь</a></li>
+        <li><a href="acsessours.html" data-key="accessories">Аксессуары</a></li>
+        <li><a href="bags.html" data-key="bags">Сумки</a></li>
       </ul>
     </nav>
-    <a href="cart.html" class="cart">Корзина</a>
+    <div style="display: flex; align-items: center;">
+      <a href="cart.html" class="cart" data-key="cart">Корзина</a>
+      <div class="language-switcher">
+        <div class="lang-toggle" id="lang-toggle">
+          <div class="lang-slider"></div>
+          <div class="lang-option active">RU</div>
+          <div class="lang-option">EN</div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
 <div class="container">
-  <h1>Ваша корзина</h1>
+  <h1 data-key="cart">Ваша корзина</h1>
 
   <table id="cart-table">
     <thead>
       <tr>
-        <th>Товар</th>
-        <th>Название</th>
-        <th>Цена</th>
-        <th>Количество</th>
-        <th>Итого</th>
+        <th data-key="product">Товар</th>
+        <th data-key="name">Название</th>
+        <th data-key="price">Цена</th>
+        <th data-key="quantity">Количество</th>
+        <th data-key="total">Итого</th>
         <th></th>
       </tr>
     </thead>
@@ -181,21 +240,22 @@
     </tbody>
     <tfoot>
       <tr class="total-row">
-        <td colspan="4" style="text-align:right;">Общая сумма:</td>
+        <td colspan="4" style="text-align:right;" data-key="totalAmount">Общая сумма:</td>
         <td id="cart-total" colspan="2">0 ₽</td>
       </tr>
     </tfoot>
   </table>
 
   <div style="text-align: right; margin-top: 20px;">
-    <button id="checkout-btn">Оформить заказ</button>
+    <button id="checkout-btn" data-key="checkout">Оформить заказ</button>
   </div>
 
-  <div id="empty-message" class="empty-cart" style="display:none;">
+  <div id="empty-message" class="empty-cart" style="display:none;" data-key="emptyCart">
     Ваша корзина пуста.
   </div>
 </div>
 
+<script src="language-manager.js"></script>
 <script>
   const cartTable = document.getElementById('cart-table');
   const cartTotal = document.getElementById('cart-total');
@@ -242,7 +302,7 @@
         <td class="product-price" data-price="${item.price}">${item.price.toLocaleString('ru-RU')} ₽</td>
         <td><input type="number" class="quantity-input" min="1" value="${item.quantity}" /></td>
         <td class="total-price">${(item.price * item.quantity).toLocaleString('ru-RU')} ₽</td>
-        <td><button class="remove-btn" data-id="${item.id}" data-size="${item.size}">Удалить</button></td>
+        <td><button class="remove-btn" data-id="${item.id}" data-size="${item.size}" data-key="remove">Удалить</button></td>
       `;
       tbody.appendChild(tr);
     });

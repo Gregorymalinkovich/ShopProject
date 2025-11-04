@@ -1,0 +1,191 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "BOTTEGA VENETTA Кожанный бомбер",
+      "category": "Верхняя одежда",
+      "type": "clothing",
+      "brand": "Bottega Veneta",
+      "price": 595500,
+      "sizes": ["M", "L", "XL"],
+      "image": "bottega-puffer.jpg",
+      "description": "Кожаный бомбер Bottega Venetta"
+    },
+    {
+      "id": 2,
+      "name": "MAISON MARGIELA Спортивные брюки",
+      "category": "Джинсы и брюки",
+      "type": "clothing",
+      "brand": "Maison Margiela",
+      "price": 78600,
+      "sizes": ["S", "M", "L"],
+      "image": "margiela-pants.jpg",
+      "description": "Maison Margiela Спортивные брюки"
+    },
+    {
+      "id": 3,
+      "name": "MAISON MARGIELA Футболка \"Distressed Logo\"",
+      "category": "Футболки и лонгсливы",
+      "type": "clothing",
+      "brand": "Maison Margiela",
+      "price": 59950,
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "image": "margiela-t-shorts.jpg",
+      "description": "Футболка MAISON MARGIELA"
+    },
+    {
+      "id": 4,
+      "name": "AMIRI Хлопковое худи",
+      "category": "Свитшоты и худи",
+      "type": "clothing",
+      "brand": "Amiri",
+      "price": 98550,
+      "sizes": ["M", "L"],
+      "image": "amiri-hoodie.jpg",
+      "description": "Amiri Хлопковое худи"
+    },
+    {
+      "id": 5,
+      "name": "RHUDE Шорты для плавания с логотипом",
+      "category": "Шорты",
+      "type": "clothing",
+      "brand": "RHUDE",
+      "price": 44300,
+      "sizes": ["S", "M", "L"],
+      "image": "rhude-shorts.jpg",
+      "description": "Шорты RHUDE"
+    },
+    {
+      "id": 6,
+      "name": "Куртка Moncler",
+      "category": "Верхняя одежда",
+      "type": "clothing",
+      "brand": "Moncler",
+      "price": 199500,
+      "sizes": ["L", "XL"],
+      "image": "moncler-puffer.jpg",
+      "description": "Пуховик Moncler Ume"
+    },
+    {
+      "id": 7,
+      "name": "MAISON MARGIELA Низкие кеды Replica \"Painted\"",
+      "category": "Кеды",
+      "type": "shoes",
+      "brand": "Maison Margiela",
+      "price": 84600,
+      "sizes": ["38", "39", "40", "41"],
+      "image": "margiela-replica-shoes.jpg",
+      "description": "Maison Margiela Низкие кеды Replica Painted"
+    },
+    {
+      "id": 8,
+      "name": "RHUDE Высокие кеды \"Rhecess\"",
+      "category": "Кеды",
+      "type": "shoes",
+      "brand": "Rhude",
+      "price": 22000,
+      "sizes": ["40", "41", "42", "43"],
+      "image": "rhude-shoes.jpg",
+      "description": "RHUDE Высокие кеды Rhecess"
+    },
+    {
+      "id": 9,
+      "name": "MAISOM MIHARA YASUHIRO Низкие кеды \"PETERSON 23\"",
+      "category": "Кеды",
+      "type": "shoes",
+      "brand": "Maison Mihara Yashiro",
+      "price": 52600,
+      "sizes": ["36", "37", "38", "39", "40"],
+      "image": "mihara-shoes.jpg",
+      "description": "Maison MIHARA YASUHIRO Низкие кеды PETERSON 23"
+    },
+    {
+      "id": 10,
+      "name": "MAISON MARGIELA Шлепки \"Tabi\"",
+      "category": "Сандалии",
+      "type": "shoes",
+      "brand": "Maison Margiela",
+      "price": 44600,
+      "sizes": ["38", "39", "40", "41", "42"],
+      "image": "margiela-tapki.jpg",
+      "description": "MAISON MARGIELA Шлепки"
+    },
+    {
+      "id": 11,
+      "name": "COMME DES GARSONS PLAY Кеды Converse x CDG Play",
+      "category": "Кеды",
+      "type": "shoes",
+      "brand": "Comme des Garsons Play",
+      "price": 19200,
+      "sizes": ["39", "40", "41", "42"],
+      "image": "cmg-shoes.jpg",
+      "description": "COMME DES GARSONS PLAY Кеды Converse x CDG Play"
+    },
+    {
+      "id": 12,
+      "name": "BOTTEGA VENETTA Сумка Cassette",
+      "category": "Сумки через плечо",
+      "type": "bags",
+      "brand": "Bottega Venetta",
+      "price": 296000,
+      "material": "Кожа",
+      "image": "bottega-bag.jpg",
+      "description": "BOTTEGA VENETTA Сумка Cassette"
+    },
+    {
+      "id": 13,
+      "name": "DIESEL Рюкзак Holi-D",
+      "category": "Рюкзаки",
+      "type": "bags",
+      "brand": "Diesel",
+      "price": 36450,
+      "material": "Нейлон",
+      "image": "diesel-bag.jpg",
+      "description": "DIESEL Рюкзак Holi-D"
+    },
+    {
+      "id": 14,
+      "name": "SAINT LAURENT Сумка Bowling",
+      "category": "Спортивные сумки",
+      "type": "bags",
+      "brand": "Saint Laurent",
+      "price": 336500,
+      "material": "Ткань",
+      "image": "saint-bag.jpg",
+      "description": "SAINT LAURENT Сумка Bowling"
+    },
+    {
+      "id": 15,
+      "name": "DSUQARED2 Хлопковая бейсболка",
+      "category": "Головные уборы",
+      "type": "accessories",
+      "brand": "Cartier",
+      "price": 22700,
+      "color": "Коричневый",
+      "image": "ds2-hat.jpg",
+      "description": "DSUQARED2 Хлопковая бейсболка"
+    },
+    {
+      "id": 16,
+      "name": "SAINT LAURENT Солнцезащитные очки",
+      "category": "Очки",
+      "type": "accessories",
+      "brand": "Tom Ford",
+      "price": 46450,
+      "color": "Золотой",
+      "image": "saint-glasses.jpg",
+      "description": "SAINT LAURENT Солнцезащитные очки"
+    },
+    {
+      "id": 17,
+      "name": "GUCCI Кожаный ремень",
+      "category": "Ремни",
+      "type": "accessories",
+      "brand": "Gucci",
+      "price": 64800,
+      "color": "Коричневый",
+      "image": "gucci-belt.jpg",
+      "description": "GUCCI Кожаный ремень"
+    }
+  ]
+}

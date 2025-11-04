@@ -53,6 +53,56 @@
     font-size: 15px;
     cursor: pointer;
     color: #222;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  .language-switcher {
+    margin-left: 10px;
+  }
+  .lang-toggle {
+    background: white;
+    border: 2px solid #e63946;
+    border-radius: 20px;
+    padding: 0px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 70px;
+    height: 28px;
+  }
+  .lang-option {
+    flex: 1;
+    text-align: center;
+    padding: 4px 0;
+    z-index: 1;
+    transition: color 0.3s ease;
+    font-size: 14px;
+  }
+  .lang-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 33px;
+    height: 24px;
+    background: #e63946;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    z-index: 0;
+  }
+  .lang-toggle.en .lang-slider {
+    transform: translateX(33px);
+  }
+  .lang-toggle.en .lang-option:first-child {
+    color: #666;
+  }
+  .lang-toggle:not(.en) .lang-option:last-child {
+    color: #666;
+  }
+  .lang-option.active {
+    color: white !important;
   }
   body {
     font-family: 'Arial', sans-serif;
@@ -158,6 +208,43 @@
     color: #b12704;
     font-weight: 700;
   }
+  .search-container {
+  position: relative;
+  margin-right: 20px;
+}
+.search-input {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 200px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.search-input:focus {
+  border-color: #e63946;
+  width: 250px;
+}
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none;
+}
+.search-result-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
 </style>
 </head>
 <body>
@@ -169,33 +256,46 @@
     </div>
     <nav>
       <ul id="menu">
-        <li><a href="clothing.html">Одежда</a></li>
-        <li><a href="shoes.html">Обувь</a></li>
-        <li><a href="acsessours.html">Аксессуары</a></li>
-        <li><a href="bags.html">Сумки</a></li>
+        <li><a href="clothing.html" data-key="clothing">Одежда</a></li>
+        <li><a href="shoes.html" data-key="shoes">круто</a></li>
+        <li><a href="acsessours.html" data-key="accessories">Аксессуары</a></li>
+        <li><a href="bags.html" data-key="bags">Сумки</a></li>
       </ul>
     </nav>
-    <a href="cart.html" class="cart" title="Перейти в корзину">Корзина</a>
+    <div style="display: flex; align-items: center;">
+      <div class="search-container">
+  <input type="text" class="search-input" placeholder="Поиск товаров..." data-key="searchPlaceholder">
+  <div class="search-results" id="searchResults"></div>
+</div>
+      <a href="cart.html" class="cart" title="Перейти в корзину" data-key="cart">Корзина</a>
+      <div class="language-switcher">
+        <div class="lang-toggle" id="lang-toggle">
+          <div class="lang-slider"></div>
+          <div class="lang-option active">RU</div>
+          <div class="lang-option">EN</div>
+        </div>
+      </div>
+    </div>
   </header>
 
   <div class="container">
     <aside class="filter">
-      <h3>Фильтр</h3>
+      <h3 data-key="filter">Фильтр</h3>
       
       <div class="filter-section">
-        <h4>Вид одежды</h4>
+        <h4 data-key="clothingType">Вид одежды</h4>
         <ul class="clothes-filter">
-          <li class="filter-item active" data-category="all">ОДЕЖДА (ВСЕ)</li>
-          <li class="filter-item" data-category="Верхняя одежда">ВЕРХНЯЯ ОДЕЖДА</li>
-          <li class="filter-item" data-category="Футболки и лонгсливы">ФУТБОЛКИ И ЛОНГСЛИВЫ</li>
-          <li class="filter-item" data-category="Джинсы и брюки">ДЖИНСЫ И БРЮКИ</li>
-          <li class="filter-item" data-category="Шорты">ШОРТЫ</li>
-          <li class="filter-item" data-category="Свитшоты и худи">СВИТШОТЫ И ХУДИ</li>
+          <li class="filter-item active" data-category="all" data-key="allClothing">ОДЕЖДА (ВСЕ)</li>
+          <li class="filter-item" data-category="Верхняя одежда" data-key="outerwear">ВЕРХНЯЯ ОДЕЖДА</li>
+          <li class="filter-item" data-category="Футболки и лонгсливы" data-key="tshirts">ФУТБОЛКИ И ЛОНГСЛИВЫ</li>
+          <li class="filter-item" data-category="Джинсы и брюки" data-key="pants">ДЖИНСЫ И БРЮКИ</li>
+          <li class="filter-item" data-category="Шорты" data-key="shorts">ШОРТЫ</li>
+          <li class="filter-item" data-category="Свитшоты и худи" data-key="sweatshirts">СВИТШОТЫ И ХУДИ</li>
         </ul>
       </div>
       
       <div class="filter-section">
-        <h4>Бренд</h4>
+        <h4 data-key="brand">Бренд</h4>
         <label><input type="checkbox" name="brand" value="Amiri" /> Amiri</label>
         <label><input type="checkbox" name="brand" value="Balenciaga" /> Balenciaga</label>
         <label><input type="checkbox" name="brand" value="Bottega Veneta" /> Bottega Veneta</label>
@@ -211,13 +311,13 @@
       </div>
       
       <div class="filter-section">
-        <h4>Диапазон цены</h4>
+        <h4 data-key="priceRange">Диапазон цены</h4>
         <input type="range" id="priceRange" min="0" max="1500000" step="1000" value="1500000" />
         <div>Максимум: <span id="priceValue">1500000</span> ₽</div>
       </div>
       
       <div class="filter-section">
-        <h4>Размер</h4>
+        <h4 data-key="size">Размер</h4>
         <label><input type="checkbox" name="size" value="XS" /> XS</label>
         <label><input type="checkbox" name="size" value="S" /> S</label>
         <label><input type="checkbox" name="size" value="M" /> M</label>
@@ -227,7 +327,7 @@
     </aside>
 
     <section class="products">
-      <div class="products-header">Каталог одежды</div>
+      <div class="products-header" data-key="catalogClothing">Каталог одежды</div>
       <div class="product-list">
         <div class="product-item" data-category="Верхняя одежда" data-id="1" data-price="595500" data-brand="Bottega Veneta" data-sizes="M,L,XL">
           <img src="bottega-puffer.jpg" alt="Кожаный бомбер Bottega Venetta" />
@@ -263,83 +363,84 @@
     </section>
   </div>
 
-<script>
-  const clothesFilterItems = document.querySelectorAll('.clothes-filter .filter-item');
-  const productItems = document.querySelectorAll('.product-item');
-  const brandCheckboxes = document.querySelectorAll('input[name="brand"]');
-  const sizeCheckboxes = document.querySelectorAll('input[name="size"]');
-  const priceRange = document.getElementById('priceRange');
-  const priceValue = document.getElementById('priceValue');
+  <script src="language-manager.js"></script>
+  <script>
+    const clothesFilterItems = document.querySelectorAll('.clothes-filter .filter-item');
+    const productItems = document.querySelectorAll('.product-item');
+    const brandCheckboxes = document.querySelectorAll('input[name="brand"]');
+    const sizeCheckboxes = document.querySelectorAll('input[name="size"]');
+    const priceRange = document.getElementById('priceRange');
+    const priceValue = document.getElementById('priceValue');
 
-  let selectedCategory = 'all';
-  let selectedBrands = new Set();
-  let selectedSizes = new Set();
-  let maxPrice = +priceRange.value;
+    let selectedCategory = 'all';
+    let selectedBrands = new Set();
+    let selectedSizes = new Set();
+    let maxPrice = +priceRange.value;
 
-  priceValue.textContent = maxPrice;
+    priceValue.textContent = maxPrice;
 
-  clothesFilterItems.forEach(item => {
-    item.addEventListener('click', () => {
-      clothesFilterItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      selectedCategory = item.getAttribute('data-category');
+    clothesFilterItems.forEach(item => {
+      item.addEventListener('click', () => {
+        clothesFilterItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        selectedCategory = item.getAttribute('data-category');
+        filterProducts();
+      });
+    });
+
+    brandCheckboxes.forEach(cb => cb.addEventListener('change', () => {
+      selectedBrands = new Set(
+        Array.from(brandCheckboxes)
+             .filter(c => c.checked)
+             .map(c => c.value)
+      );
+      filterProducts();
+    }));
+
+    sizeCheckboxes.forEach(cb => cb.addEventListener('change', () => {
+      selectedSizes = new Set(
+        Array.from(sizeCheckboxes)
+             .filter(c => c.checked)
+             .map(c => c.value)
+      );
+      filterProducts();
+    }));
+
+    priceRange.addEventListener('input', () => {
+      maxPrice = +priceRange.value;
+      priceValue.textContent = maxPrice;
       filterProducts();
     });
-  });
 
-  brandCheckboxes.forEach(cb => cb.addEventListener('change', () => {
-    selectedBrands = new Set(
-      Array.from(brandCheckboxes)
-           .filter(c => c.checked)
-           .map(c => c.value)
-    );
-    filterProducts();
-  }));
+    function filterProducts() {
+      productItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        const brand = item.getAttribute('data-brand');
+        const price = +item.getAttribute('data-price');
+        const sizes = item.getAttribute('data-sizes').split(',');
 
-  sizeCheckboxes.forEach(cb => cb.addEventListener('change', () => {
-    selectedSizes = new Set(
-      Array.from(sizeCheckboxes)
-           .filter(c => c.checked)
-           .map(c => c.value)
-    );
-    filterProducts();
-  }));
+        let categoryMatch = (selectedCategory === 'all') || (category === selectedCategory);
+        let brandMatch = (selectedBrands.size === 0) || selectedBrands.has(brand);
+        let priceMatch = price <= maxPrice;
+        let sizeMatch = (selectedSizes.size === 0) || sizes.some(sz => selectedSizes.has(sz));
 
-  priceRange.addEventListener('input', () => {
-    maxPrice = +priceRange.value;
-    priceValue.textContent = maxPrice;
-    filterProducts();
-  });
+        if (categoryMatch && brandMatch && priceMatch && sizeMatch) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
 
-  function filterProducts() {
-    productItems.forEach(item => {
-      const category = item.getAttribute('data-category');
-      const brand = item.getAttribute('data-brand');
-      const price = +item.getAttribute('data-price');
-      const sizes = item.getAttribute('data-sizes').split(',');
-
-      let categoryMatch = (selectedCategory === 'all') || (category === selectedCategory);
-      let brandMatch = (selectedBrands.size === 0) || selectedBrands.has(brand);
-      let priceMatch = price <= maxPrice;
-      let sizeMatch = (selectedSizes.size === 0) || sizes.some(sz => selectedSizes.has(sz));
-
-      if (categoryMatch && brandMatch && priceMatch && sizeMatch) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
+    document.querySelectorAll('.product-item').forEach(item => {
+      item.style.cursor = 'pointer';
+      item.addEventListener('click', () => {
+        const productId = item.getAttribute('data-id');
+        window.location.href = `product.html?id=${productId}`;
+      });
     });
-  }
 
-  document.querySelectorAll('.product-item').forEach(item => {
-    item.style.cursor = 'pointer';
-    item.addEventListener('click', () => {
-      const productId = item.getAttribute('data-id');
-      window.location.href = `product.html?id=${productId}`;
-    });
-  });
-
-  filterProducts();
-</script>
+    filterProducts();
+  </script>
 </body>
 </html>
